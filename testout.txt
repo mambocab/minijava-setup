@@ -1,0 +1,237 @@
+Buildfile: /vagrant/source/MiniJavaLLVM/build.xml
+
+git_setup:
+
+build_libs:
+
+compile:
+
+runtime:
+
+jar:
+
+test:
+     [exec] 1,3c1
+     [exec] < ERROR: "unitTests/badIface4.j", line 12
+     [exec] < SomeOtherClass does not implement method other from Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] 10,12c8
+     [exec] < ERROR: "unitTests/badIface4.j", line 6
+     [exec] < SomeClass does not implement method test from Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] 1,6c1,3
+     [exec] < ERROR: "unitTests/badIface.j", line 13
+     [exec] < Unable to instantiate abstract class or interface Iface
+     [exec] < 
+     [exec] < ERROR: "unitTests/badIface.j", line 13
+     [exec] < Unable to instantiate abstract class or interface Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > ERROR: 
+     [exec] > Writing LLVM Bitcode to build/test/badIface.bc
+     [exec] 0a1
+     [exec] > ERROR: 
+     [exec] 1,3c1,2
+     [exec] < ERROR: "unitTests/badArrayInherit.j", line 9
+     [exec] < Cannot initialize value of type B[] to variable of type A[]
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > Writing LLVM Bitcode to build/test/badArrayInherit.bc
+     [exec] 0a1
+     [exec] > ERROR: 
+     [exec] 1,3c1,4
+     [exec] < ERROR: "unitTests/badArrayInherit2.j", line 10
+     [exec] < Cannot assign value of type A[] to variable of type B[]
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > Stored value type does not match pointer operand type!
+     [exec] >   store %"A[]"* %"call_A[]", %"B[]"** %b
+     [exec] >  %"B[]"*
+     [exec] 1,2c1,3
+     [exec] < ERROR: "unitTests/badSuper1.j", line 14
+     [exec] < Too few arguments
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > Incorrect number of arguments passed to called function!
+     [exec] >   %call_Test = call %Test* @Test_Test(%Test* %cast)
+     [exec] 0a1
+     [exec] > ERROR: 
+     [exec] Failing Tests:
+     [exec] ========== unitTests/badArrayInherit.j
+     [exec] diff unitTests/badArrayInherit.mjc.ref build/test/badArrayInherit.mjc.out
+     [exec] 1,3c1,2
+     [exec] < ERROR: "unitTests/badArrayInherit.j", line 9
+     [exec] < Cannot initialize value of type B[] to variable of type A[]
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > Writing LLVM Bitcode to build/test/badArrayInherit.bc
+     [exec] 
+     [exec] ========== unitTests/badArrayInherit2.j
+     [exec] diff unitTests/badArrayInherit2.mjc.ref build/test/badArrayInherit2.mjc.out
+     [exec] 1,3c1,4
+     [exec] < ERROR: "unitTests/badArrayInherit2.j", line 10
+     [exec] < Cannot assign value of type A[] to variable of type B[]
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > Stored value type does not match pointer operand type!
+     [exec] >   store %"A[]"* %"call_A[]", %"B[]"** %b
+     [exec] >  %"B[]"*
+     [exec] 
+     [exec] ========== unitTests/badConstructor.j
+     [exec] diff unitTests/badConstructor.mjc.ref build/test/badConstructor.mjc.out
+     [exec] 1,3c1,12
+     [exec] < ERROR: "unitTests/badConstructor.j", line 2
+     [exec] < Multiple definitions for method Constructed
+     [exec] < 
+     [exec] ---
+     [exec] > Exception in thread "main" java.lang.NullPointerException
+     [exec] > 	at compiler.NameClashDiagnostic.getPos(NameClashDiagnostic.java:24)
+     [exec] > 	at compiler.SimpleHandler.respondTo(SimpleHandler.java:32)
+     [exec] > 	at compiler.Handler.report(Handler.java:48)
+     [exec] > 	at compiler.Phase.report(Phase.java:45)
+     [exec] > 	at syntax.ClassType.addMethod(ClassType.java:394)
+     [exec] > 	at syntax.MethDecl.addToClass(MethDecl.java:76)
+     [exec] > 	at syntax.ClassType.checkClass(ClassType.java:199)
+     [exec] > 	at checker.Context.checkClasses(Context.java:165)
+     [exec] > 	at checker.Context.check(Context.java:148)
+     [exec] > 	at Compiler.compile(Compiler.java:142)
+     [exec] > 	at Compiler.main(Compiler.java:104)
+     [exec] 
+     [exec] ========== unitTests/badIface.j
+     [exec] diff unitTests/badIface.mjc.ref build/test/badIface.mjc.out
+     [exec] 1,6c1,3
+     [exec] < ERROR: "unitTests/badIface.j", line 13
+     [exec] < Unable to instantiate abstract class or interface Iface
+     [exec] < 
+     [exec] < ERROR: "unitTests/badIface.j", line 13
+     [exec] < Unable to instantiate abstract class or interface Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > ERROR: 
+     [exec] > Writing LLVM Bitcode to build/test/badIface.bc
+     [exec] 
+     [exec] ========== unitTests/badIface2.j
+     [exec] diff unitTests/badIface2.mjc.ref build/test/badIface2.mjc.out
+     [exec] 1,3c1,9
+     [exec] < ERROR: "unitTests/badIface2.j", line 6
+     [exec] < Can only implement interface types. SomeOtherClass is not an interface.
+     [exec] < 
+     [exec] ---
+     [exec] > Exception in thread "main" java.lang.NullPointerException
+     [exec] > 	at syntax.ClassType.<init>(ClassType.java:72)
+     [exec] > 	at syntax.InterfaceType.<init>(InterfaceType.java:40)
+     [exec] > 	at syntax.ClassType.verifyInterfaces(ClassType.java:299)
+     [exec] > 	at syntax.ClassType.checkClass(ClassType.java:289)
+     [exec] > 	at checker.Context.checkClasses(Context.java:165)
+     [exec] > 	at checker.Context.check(Context.java:148)
+     [exec] > 	at Compiler.compile(Compiler.java:142)
+     [exec] > 	at Compiler.main(Compiler.java:104)
+     [exec] 
+     [exec] ========== unitTests/badIface3.j
+     [exec] diff unitTests/badIface3.mjc.ref build/test/badIface3.mjc.out
+     [exec] 1,6c1,18
+     [exec] < ERROR: "unitTests/badIface3.j", line 13
+     [exec] < SomeOtherClass does not implement method other from Iface
+     [exec] < 
+     [exec] < ERROR: "unitTests/badIface3.j", line 6
+     [exec] < SomeClass does not implement method test from Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > ERROR: 
+     [exec] > ERROR: 
+     [exec] > ERROR: 
+     [exec] > Exception in thread "main" java.lang.NullPointerException
+     [exec] > 	at syntax.ObjectInvocation.compileInvocation(ObjectInvocation.java:68)
+     [exec] > 	at syntax.Invocation.compileExpr(Invocation.java:87)
+     [exec] > 	at syntax.Expression.compileExpr(Expression.java:72)
+     [exec] > 	at syntax.ExprStmt.compile(ExprStmt.java:64)
+     [exec] > 	at syntax.Statement.compileThen(Statement.java:67)
+     [exec] > 	at syntax.IfThenElse.compile(IfThenElse.java:80)
+     [exec] > 	at syntax.IfThenElse.compile(IfThenElse.java:82)
+     [exec] > 	at syntax.Statement.compileRet(Statement.java:75)
+     [exec] > 	at checker.MethEnv.compileMethod(MethEnv.java:247)
+     [exec] > 	at checker.MethEnv.compileMethods(MethEnv.java:238)
+     [exec] > 	at syntax.ClassType.compile(ClassType.java:451)
+     [exec] > 	at Compiler.compile(Compiler.java:154)
+     [exec] > 	at Compiler.main(Compiler.java:104)
+     [exec] 
+     [exec] ========== unitTests/badIface4.j
+     [exec] diff unitTests/badIface4.mjc.ref build/test/badIface4.mjc.out
+     [exec] 1,3c1
+     [exec] < ERROR: "unitTests/badIface4.j", line 12
+     [exec] < SomeOtherClass does not implement method other from Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] 10,12c8
+     [exec] < ERROR: "unitTests/badIface4.j", line 6
+     [exec] < SomeClass does not implement method test from Iface
+     [exec] < 
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] 
+     [exec] ========== unitTests/badScope.j
+     [exec] diff unitTests/badScope.mjc.ref build/test/badScope.mjc.out
+     [exec] 1,3c1,21
+     [exec] < ERROR: "unitTests/badScope.j", line 8
+     [exec] < Repeated definition for variable p
+     [exec] < 
+     [exec] ---
+     [exec] > Exception in thread "main" java.lang.NullPointerException
+     [exec] > 	at compiler.NameClashDiagnostic.getPos(NameClashDiagnostic.java:24)
+     [exec] > 	at compiler.SimpleHandler.respondTo(SimpleHandler.java:32)
+     [exec] > 	at compiler.Handler.report(Handler.java:48)
+     [exec] > 	at compiler.Phase.report(Phase.java:45)
+     [exec] > 	at syntax.LocalVarDecl.check(LocalVarDecl.java:73)
+     [exec] > 	at syntax.Block.check(Block.java:63)
+     [exec] > 	at syntax.IfThenElse.check(IfThenElse.java:68)
+     [exec] > 	at syntax.Statement.check(Statement.java:51)
+     [exec] > 	at syntax.Statement.check(Statement.java:54)
+     [exec] > 	at syntax.Statement.check(Statement.java:54)
+     [exec] > 	at syntax.Statement.check(Statement.java:54)
+     [exec] > 	at syntax.LocalVarDecl.check(LocalVarDecl.java:111)
+     [exec] > 	at syntax.Block.check(Block.java:63)
+     [exec] > 	at checker.MethEnv.checkMethod(MethEnv.java:189)
+     [exec] > 	at checker.MethEnv.checkMethods(MethEnv.java:180)
+     [exec] > 	at syntax.ClassType.checkMembers(ClassType.java:443)
+     [exec] > 	at checker.Context.checkMembers(Context.java:257)
+     [exec] > 	at checker.Context.check(Context.java:149)
+     [exec] > 	at Compiler.compile(Compiler.java:142)
+     [exec] > 	at Compiler.main(Compiler.java:104)
+     [exec] 
+     [exec] ========== unitTests/badSuper1.j
+     [exec] diff unitTests/badSuper1.mjc.ref build/test/badSuper1.mjc.out
+     [exec] 1,2c1,3
+     [exec] < ERROR: "unitTests/badSuper1.j", line 14
+     [exec] < Too few arguments
+     [exec] ---
+     [exec] > ERROR: 
+     [exec] > Incorrect number of arguments passed to called function!
+     [exec] >   %call_Test = call %Test* @Test_Test(%Test* %cast)
+     [exec] 
+     [exec] ========== unitTests/badSuper2.j
+     [exec] diff unitTests/badSuper2.mjc.ref build/test/badSuper2.mjc.out
+     [exec] 0a1
+     [exec] > ERROR: 
+     [exec] 
+     [exec] ========== unitTests/badSuper3.j
+     [exec] diff unitTests/badSuper3.mjc.ref build/test/badSuper3.mjc.out
+     [exec] 0a1
+     [exec] > ERROR: 
+     [exec] 
+     [exec] ========== unitTests/badSuper4.j
+     [exec] diff unitTests/badSuper4.mjc.ref build/test/badSuper4.mjc.out
+     [exec] 0a1
+     [exec] > ERROR: 
+     [exec] 

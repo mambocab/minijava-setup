@@ -4,21 +4,19 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-$script = <<SCRIPT
-echo 'installing ansible...'
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
+$root_script = <<SCRIPT
+echo 'updating apt...'
 sudo apt-get update
-sudo apt-get install ansible
-echo 'installing git...'
-sudo apt-get install git
-echo 'getting dotfiles...'
-git clone https://github.com/asmacdo/dotfiles.git ~/dotfiles
-echo 'configuring dotfiles...'
-./bin/dot
+echo 'installing stuff...'
+sudo apt-get install -y git vim ant
+SCRIPT
+
+$user_script = <<SCRIPT
 echo 'getting minijava...'
+cd ~ 
 git clone https://github.com/mambocab/MiniJavaLLVM.git
-echo 'DONE\n================================================================='
+cd MiniJavaLLVM
+ant ubuntu_depends
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -27,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -37,8 +35,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Use VBoxManage to customize the VM to provide more memory. 
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
+  require 'time'
+  timezone = 'Etc/GMT' + ((Time.zone_offset(Time.now.zone)/60)/60).to_s
+  config.vm.provision :shell, :inline => "if [ $(grep -c UTC /etc/timezone) -gt 0 ]; then echo \"#{timezone}\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata; fi"
 
-  config.vm.provision "shell", inline: $script
+
+
+
+  #config.vm.provision "shell", inline: $root_script
+  #config.vm.provision "shell", inline: $user_script, privileged: false
   #
   # View the documentation for the provider you're using for more
   # information on available options.
