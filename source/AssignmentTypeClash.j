@@ -1,7 +1,7 @@
 class AssignmentTypeClash {
     public AssignmentTypeClash() {
-        int i = 1;
-        i = "foo";
+        String s; 
+        s = 9;
     }
 }
 
