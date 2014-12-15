@@ -44,8 +44,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
 
-  #config.vm.provision "shell", inline: $root_script
-  #config.vm.provision "shell", inline: $user_script, privileged: false
+  config.vm.provision "shell", inline: $root_script
+  config.vm.provision "shell", inline: $user_script, privileged: false
   #
   # View the documentation for the provider you're using for more
   # information on available options.
