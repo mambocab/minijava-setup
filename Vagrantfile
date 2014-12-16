@@ -13,7 +13,7 @@ SCRIPT
 
 $user_script = <<SCRIPT
 echo 'getting minijava...'
-cd /vagrant
+cd /vagrant/
 mkdir source
 cd source
 git clone https://github.com/mambocab/MiniJavaLLVM.git
@@ -37,9 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Use VBoxManage to customize the VM to provide more memory. 
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
-  require 'time'
-  timezone = 'Etc/GMT' + ((Time.zone_offset(Time.now.zone)/60)/60).to_s
-  config.vm.provision :shell, :inline => "if [ $(grep -c UTC /etc/timezone) -gt 0 ]; then echo \"#{timezone}\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata; fi"
+  #require 'time'
+  #timezone = 'Etc/GMT' + ((Time.zone_offset(Time.now.zone)/60)/60).to_s
+  #config.vm.provision :shell, :inline => "if [ $(grep -c UTC /etc/timezone) -gt 0 ]; then echo \"#{timezone}\" | # #sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata; fi"
 
 
 
