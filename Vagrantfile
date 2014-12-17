@@ -7,17 +7,21 @@ VAGRANTFILE_API_VERSION = "2"
 $root_script = <<SCRIPT
 echo 'updating apt...'
 sudo apt-get update
-echo 'installing git, vim, openjdk7, and ant...'
-sudo apt-get install -y git vim openjdk-7-jdk ant
+echo 'installing git, vim, openjdk7, ant, and ant-contrib...'
+sudo apt-get install -y git
+sudo apt-get install -y vim
+sudo apt-get install -y openjdk-7-jdk
+sudo apt-get install -y ant
+sudo apt-get install -y ant-contrib
 SCRIPT
 
 $user_script = <<SCRIPT
 echo 'getting minijava...'
-cd /vagrant/
-mkdir source
-cd source
+cd /vagrant/source/
 git clone https://github.com/mambocab/MiniJavaLLVM.git
 cd MiniJavaLLVM
+git fetch
+git checkout introduce-unsatisfied-implication
 ant ubuntu_depends
 SCRIPT
 
