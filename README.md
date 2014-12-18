@@ -59,7 +59,15 @@ You may need to manually set the JDK you use as described [here](https://help.ub
 
 ## Implementation
 
-Notifications, in this system, are `Diagnostic`s. So are the actual errors raised when problems are encountered are also `Diagnostic`s. I've separated these out into two subclasses, `ThrownError`s and tktktktktk. Each `ThrownError` subclass is (should be?) unique to the site at which it's thrown -- that is to say, tktktktk is only thrown in a single file, exactly where that error is applicable.
+Notifications, in this system, are `Diagnostic`s. The actual errors raised when problems are encountered are also `Diagnostic`s.
+
+In the `notifications.diagnostics.thrownerrors` package, you find the errors thrown when the compiler encounters problems. Each of these classes is (should be?) unique to the site at which it's thrown -- that is to say, `DoWhileTestError` is only thrown in a `DoWhile.java`, exactly where that error is applicable.
+
+These also all inherit from `CompilerDiagnosticBuilder`, which contains default implementations for `getText` and `getPos`. These are used by the compiler's diagnostic handler, which is ultimately what prints messages. See `AssignmentTypeError` for an example of overriding this method -- so far, all that's really been required has been indirection, but there may be more complex logic here for `CompilerDiagnosticBuilder`s that contain multiple diagnostics.
+
+The `Diagnostic` types in the `notifications.diagnostics` package are leftovers from the previous implementation. I believe all of them can be expressed in terms of unsatisfied implications.
+
+Unsatisfied implications are in the `notifications.implication` package. `UnsatisfiedImplicationDiagnostic` is the star of the show. Its constructor takes an `Antecedent` and a `Consequent`.
 
 [vagrant]: https://www.vagrantup.com/
 [vagrantfile]: https://github.com/mambocab/minijava-setup/blob/master/Vagrantfile
