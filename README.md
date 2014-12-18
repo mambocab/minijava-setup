@@ -2,6 +2,8 @@
 
 I've only ever got this to build on Ubuntu. I used [Vagrant][vagrant] to create an isolated Ubuntu environment. I've only used Vagrant on OS X, so YMMV. Vagrant depends on Ruby.
 
+If you're running on Windows, you may need to get an ssh executable installed. On @captainemerson's machine, installing Cygwin with OpenSSH worked. (Including OpenSSH may not have been necessary. You can experiment with this if you want.)
+
 To set up the directory you'll be working in, start with
 
 ```sh
@@ -10,7 +12,7 @@ cd minijava-setup
 vagrant up
 ```
 
-The first time you do this may take a while, since it will have to download the `ubuntu/trusty64` image.
+The first time you do this may take a while, since it will have to download the `ubuntu/trusty32` image.
 
 Actually it'll take a while regardless, since it updates and downloads a number of packages with `apt`. But, that's ops!
 
@@ -27,7 +29,13 @@ So, open up `source/MiniJavaLLVM` in your IDE, and in the terminal (in the minij
 vagrant ssh
 ```
 
-This `ssh`s you into the running VM, dropping you into a `bash` prompt. From there, run
+This `ssh`s you into the running VM, dropping you into a `bash` prompt. If you'd rather just use the shell in the VirtualBox GUI, uncomment this line in the `Vagrantfile`:
+
+```ruby
+# vb.gui = true
+```
+
+In any event, once you've got a shell in the VM, run
 
 ```sh
 cd /vagrant/
@@ -39,7 +47,7 @@ Look familiar? This is the Ubuntu box's view onto the `minijava-setup` directory
 To compile MiniJavaLLVM:
 
 ```sh
-cd /source/MiniJavaLLVM/
+cd source/MiniJavaLLVM/
 ant jar
 ```
 

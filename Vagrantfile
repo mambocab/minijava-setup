@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/trusty32"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -40,6 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "virtualbox" do |vb|
     # Use VBoxManage to customize the VM to provide more memory. 
     vb.customize ["modifyvm", :id, "--memory", "2048"]
+    # vb.gui = true
   end
   #require 'time'
   #timezone = 'Etc/GMT' + ((Time.zone_offset(Time.now.zone)/60)/60).to_s
